@@ -85,6 +85,14 @@ const Interview = () => {
 
     return (
         <div className='interview-page'>
+
+            {/* ── ResuAI Top Nav ── */}
+            <nav className='resuai-nav'>
+                <div className='resuai-nav__logo'>
+                    <span className='resuai-nav__logo-resu'>Resu</span><span className='resuai-nav__logo-ai'>AI</span>
+                </div>
+            </nav>
+
             <div className='interview-layout'>
 
                 {/* ── Left Nav ── */}

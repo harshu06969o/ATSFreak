@@ -1,44 +1,429 @@
-main{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ═══════════════════════════════════════════════
+   AUTH PAGE — Premium Dark Glassmorphic Design
+   ═══════════════════════════════════════════════ */
+
+.auth-page {
     min-height: 100vh;
     width: 100%;
-
+    background-color: #080a0f;
+    background-image:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(20, 184, 166, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(99, 102, 241, 0.07) 0%, transparent 60%);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif;
     display: flex;
-    justify-content: center;
+    align-items: stretch;
+}
+
+/* Ambient orbs */
+.auth-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+
+    &--1 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(20, 184, 166, 0.12) 0%, transparent 70%);
+        top: -150px;
+        left: -100px;
+        animation: orb-drift 12s ease-in-out infinite alternate;
+    }
+
+    &--2 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.10) 0%, transparent 70%);
+        bottom: -100px;
+        right: -80px;
+        animation: orb-drift 15s ease-in-out infinite alternate-reverse;
+    }
+
+    &--3 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(20, 184, 166, 0.06) 0%, transparent 70%);
+        top: 50%;
+        left: 40%;
+        animation: orb-drift 18s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes orb-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(30px, -20px) scale(1.05); }
+    100% { transform: translate(-20px, 30px) scale(0.95); }
+}
+
+/* ── Layout ── */
+.auth-layout {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Hero Panel (Left) ── */
+.auth-hero {
+    flex: 1;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem 4rem 4rem;
 
+    @media (max-width: 900px) {
+        display: none;
+    }
+}
 
-    .form-container{
-        min-width: 350px;
+.auth-hero__inner {
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+/* ── Logo ── */
+.auth-logo {
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: -0.02em;
+    user-select: none;
+
+    &--hero {
+        font-size: 2.8rem;
+        font-weight: 900;
+        line-height: 1;
     }
 
-    form{
+    &--card {
+        font-size: 1.75rem;
+        font-weight: 900;
+        line-height: 1;
+        justify-content: center;
+    }
+
+    &__resu {
+        color: #ffffff;
+    }
+
+    &__ai {
+        color: #2dd4bf;
+        /* Teal-400 */
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #2dd4bf, transparent);
+            border-radius: 99px;
+        }
+    }
+}
+
+/* ── Hero Text ── */
+.auth-hero__headline {
+    font-size: clamp(2rem, 3vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #f9fafb;
+    letter-spacing: -0.03em;
+}
+
+.auth-hero__sub {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #9ca3af;
+    font-weight: 400;
+}
+
+/* ── Pills ── */
+.auth-hero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.auth-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #d1fae5;
+    background: rgba(20, 184, 166, 0.08);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+    transition: background 0.2s, border-color 0.2s;
+
+    &:hover {
+        background: rgba(20, 184, 166, 0.15);
+        border-color: rgba(20, 184, 166, 0.4);
+    }
+}
+
+/* ── Stat Row ── */
+.auth-hero__stat-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+}
+
+.auth-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+
+    &__num {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #2dd4bf;
+        letter-spacing: -0.02em;
+    }
+
+    &__label {
+        font-size: 0.7rem;
+        color: #6b7280;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    &__divider {
+        width: 1px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* ── Form Panel (Right) ── */
+.auth-form-panel {
+    width: 480px;
+    min-width: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.015);
+
+    @media (max-width: 900px) {
+        width: 100%;
+        min-width: unset;
+        border-left: none;
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* ── Glass Card ── */
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02) inset,
+        0 32px 64px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(20, 184, 166, 0.03);
+
+    &__header {
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 0.75rem;
+        text-align: center;
     }
 
-    .input-group{
+    &__title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #f9fafb;
+        letter-spacing: -0.02em;
+        margin-top: 0.25rem;
+    }
+
+    &__subtitle {
+        font-size: 0.9rem;
+        color: #6b7280;
+        font-weight: 400;
+    }
+
+    &__footer-text {
+        text-align: center;
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+}
+
+/* ── Form ── */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* ── Field ── */
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+
+    &__label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #9ca3af;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+
+    &__wrapper {
+        position: relative;
         display: flex;
-        flex-direction: column;
+        align-items: center;
+    }
 
-        gap: 0.5rem;
+    &__icon {
+        position: absolute;
+        left: 0.9rem;
+        color: #4b5563;
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+        transition: color 0.2s;
+    }
 
+    &__input {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 0.8rem 1rem 0.8rem 2.75rem;
+        font-size: 0.9rem;
+        color: #f3f4f6;
+        font-family: 'Inter', system-ui, sans-serif;
+        outline: none;
+        transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
 
-        input{
-            border: none;
-            outline: none;
-            padding-inline: 1rem;
-            padding-block: 0.75rem;
-            border-radius: 0.75rem;
+        &::placeholder {
+            color: #374151;
+        }
+
+        &:focus {
+            border-color: rgba(45, 212, 191, 0.5);
+            background: rgba(45, 212, 191, 0.04);
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.08);
+
+            /* Glow the icon when field is focused */
+            & ~ .auth-field__icon {
+                color: #2dd4bf;
+            }
         }
     }
 
-    a{
-        color: #e1034d;
-        text-decoration: none;
+    /* Icon color on sibling focus — different approach since input comes after icon */
+    &__wrapper:focus-within .auth-field__icon {
+        color: #2dd4bf;
     }
+}
+
+/* ── Primary Button ── */
+.auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', system-ui, sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    margin-top: 0.25rem;
+
+    &--primary {
+        background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
+
+        svg {
+            transition: transform 0.2s;
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+            box-shadow: 0 6px 28px rgba(20, 184, 166, 0.45);
+            transform: translateY(-1px);
+
+            svg {
+                transform: translateX(3px);
+            }
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(20, 184, 166, 0.3);
+        }
+    }
+}
+
+/* ── Auth Link ── */
+.auth-link {
+    color: #2dd4bf;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #5eead4;
+        text-decoration: underline;
+    }
+}
+
+/* ── Loading State ── */
+.auth-loading {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #080a0f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #6b7280;
+    font-family: 'Inter', system-ui, sans-serif;
+
+    &__spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid rgba(45, 212, 191, 0.15);
+        border-top-color: #2dd4bf;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }

@@ -14,6 +14,55 @@ $severity-high: #ff4d4d;
 $severity-medium: #f5a623;
 $severity-low: #3fb950;
 
+// ── ResuAI Nav Bar ────────────────────────────────────────────────────────────
+.resuai-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    background: rgba(13, 17, 23, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+
+    &__logo {
+        display: inline-flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        user-select: none;
+    }
+
+    &__logo-resu {
+        color: #f9fafb;
+    }
+
+    &__logo-ai {
+        color: #2dd4bf;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #2dd4bf, transparent);
+            border-radius: 99px;
+        }
+    }
+}
+
 *::-webkit-scrollbar {
     display: none;
 }
@@ -26,8 +75,8 @@ $severity-low: #3fb950;
     color: $text-primary;
     font-family: $font-stack;
     display: flex;
+    flex-direction: column;
     align-items: stretch;
-    padding: 1.5rem;
     box-sizing: border-box;
 }
 
@@ -41,6 +90,11 @@ $severity-low: #3fb950;
     border: 1px solid $border-color;
     border-radius: 1rem;
     justify-content: space-between;
+    flex: 1;
+    margin: 1.5rem auto;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    width: calc(100% - 3rem);
 }
 
 .interview-divider {

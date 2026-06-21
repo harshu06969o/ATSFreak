@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import "../style/home.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
+import { useAuth } from '../../auth/hooks/useAuth'
 
 const Home = () => {
 
@@ -29,6 +30,13 @@ const Home = () => {
 
     return (
         <div className='home-page'>
+
+            {/* ── ResuAI Top Nav ── */}
+            <nav className='resuai-nav'>
+                <div className='resuai-nav__logo'>
+                    <span className='resuai-nav__logo-resu'>Resu</span><span className='resuai-nav__logo-ai'>AI</span>
+                </div>
+            </nav>
 
             {/* Page Header */}
             <header className='page-header'>

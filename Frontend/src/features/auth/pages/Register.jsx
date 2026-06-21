@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
+import '../auth.form.scss'
 
 const Register = () => {
 
@@ -9,49 +10,146 @@ const Register = () => {
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
 
-    const {loading,handleRegister} = useAuth()
-    
+    const { loading, handleRegister } = useAuth()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleRegister({username,email,password})
+        await handleRegister({ username, email, password })
         navigate("/")
     }
 
-    if(loading){
-        return (<main><h1>Loading.......</h1></main>)
+    if (loading) {
+        return (
+            <main className="auth-loading">
+                <div className="auth-loading__spinner" />
+                <p>Creating your account...</p>
+            </main>
+        )
     }
 
     return (
-        <main>
-            <div className="form-container">
-                <h1>Register</h1>
+        <main className="auth-page">
+            {/* Ambient background orbs */}
+            <div className="auth-orb auth-orb--1" />
+            <div className="auth-orb auth-orb--2" />
+            <div className="auth-orb auth-orb--3" />
 
-                <form onSubmit={handleSubmit}>
+            <div className="auth-layout">
 
-                    <div className="input-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                            onChange={(e) => { setUsername(e.target.value) }}
-                            type="text" id="username" name='username' placeholder='Enter username' />
+                {/* ── Hero / Left Panel ── */}
+                <div className="auth-hero">
+                    <div className="auth-hero__inner">
+                        <div className="auth-logo auth-logo--hero">
+                            <span className="auth-logo__resu">Resu</span><span className="auth-logo__ai">AI</span>
+                        </div>
+                        <h1 className="auth-hero__headline">
+                            Outsmart the ATS.<br />Land Your Dream Role.
+                        </h1>
+                        <p className="auth-hero__sub">
+                            Upload your resume, analyze missing keywords, and generate a perfectly tailored FAANG-ready profile in seconds.
+                        </p>
+                        <div className="auth-hero__pills">
+                            <span className="auth-pill">⚡ ATS Keyword Analysis</span>
+                            <span className="auth-pill">🎯 FAANG-Ready Profiles</span>
+                            <span className="auth-pill">🤖 AI-Powered</span>
+                        </div>
+                        <div className="auth-hero__stat-row">
+                            <div className="auth-stat">
+                                <span className="auth-stat__num">94%</span>
+                                <span className="auth-stat__label">ATS Pass Rate</span>
+                            </div>
+                            <div className="auth-stat__divider" />
+                            <div className="auth-stat">
+                                <span className="auth-stat__num">50k+</span>
+                                <span className="auth-stat__label">Resumes Analyzed</span>
+                            </div>
+                            <div className="auth-stat__divider" />
+                            <div className="auth-stat">
+                                <span className="auth-stat__num">30s</span>
+                                <span className="auth-stat__label">Avg. Generation</span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            onChange={(e) => { setEmail(e.target.value) }}
-                            type="email" id="email" name='email' placeholder='Enter email address' />
+                </div>
+
+                {/* ── Auth Form / Right Panel ── */}
+                <div className="auth-form-panel">
+                    <div className="auth-card">
+                        <div className="auth-card__header">
+                            <div className="auth-logo auth-logo--card">
+                                <span className="auth-logo__resu">Resu</span><span className="auth-logo__ai">AI</span>
+                            </div>
+                            <h2 className="auth-card__title">Create your account</h2>
+                            <p className="auth-card__subtitle">Start landing more interviews today</p>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="auth-form">
+                            <div className="auth-field">
+                                <label htmlFor="username" className="auth-field__label">Username</label>
+                                <div className="auth-field__wrapper">
+                                    <span className="auth-field__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    </span>
+                                    <input
+                                        onChange={(e) => { setUsername(e.target.value) }}
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        placeholder="Choose a username"
+                                        className="auth-field__input"
+                                        autoComplete="username"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="auth-field">
+                                <label htmlFor="email" className="auth-field__label">Email Address</label>
+                                <div className="auth-field__wrapper">
+                                    <span className="auth-field__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    </span>
+                                    <input
+                                        onChange={(e) => { setEmail(e.target.value) }}
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder="you@example.com"
+                                        className="auth-field__input"
+                                        autoComplete="email"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="auth-field">
+                                <label htmlFor="password" className="auth-field__label">Password</label>
+                                <div className="auth-field__wrapper">
+                                    <span className="auth-field__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    </span>
+                                    <input
+                                        onChange={(e) => { setPassword(e.target.value) }}
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder="Create a strong password"
+                                        className="auth-field__input"
+                                        autoComplete="new-password"
+                                    />
+                                </div>
+                            </div>
+
+                            <button type="submit" className="auth-btn auth-btn--primary">
+                                <span>Create Account</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </button>
+                        </form>
+
+                        <p className="auth-card__footer-text">
+                            Already have an account?{' '}
+                            <Link to="/login" className="auth-link">Sign in</Link>
+                        </p>
                     </div>
-                    <div className="input-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            onChange={(e) => { setPassword(e.target.value) }}
-                            type="password" id="password" name='password' placeholder='Enter password' />
-                    </div>
-
-                    <button className='button primary-button' >Register</button>
-
-                </form>
-
-                <p>Already have an account? <Link to={"/login"} >Login</Link> </p>
+                </div>
             </div>
         </main>
     )
